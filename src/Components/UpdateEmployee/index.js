@@ -20,7 +20,7 @@ const UpdateEmployee = () => {
         }).catch(err => {
             console.log('Error: ', err);
         })
-    }, [])
+    }, [params.id])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
