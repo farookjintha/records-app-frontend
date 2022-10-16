@@ -7,16 +7,22 @@ const EmployeeList = () => {
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
+        getEmployees();
+    }, []);
+
+    const getEmployees = () => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/employees`).then(response => {
             setEmployees(response.data)
         }).catch(err => {
             console.log('Error:', err)
         })
-    }, []);
+    };
 
     const deleteEmployee = (employeeId) => {
         axios.delete(`${process.env.REACT_APP_BASE_URL}/employees/${employeeId}`).then(response => {
-            console.log('Response: ', response);
+            if(response){
+                getEmployees();
+            }
         }).catch(err => {
             console.log('Err: ', err);
         })
